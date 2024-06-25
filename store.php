@@ -5,8 +5,8 @@ include __DIR__ . "/models/Toy.php";
 include __DIR__ . "/models/Food.php";
 include __DIR__ . "/models/Kennel.php";
 
-$dogCategory = new Category("CATEGORY: DOG", "Prodotti per cani", "categoria cane");
-$catCategory = new Category("CATEGORY: CAT", "Prodotti per gatti", "categoria gatti");
+$dogCategory = new Category("CATEGORY: DOG", "Dog's Products", "Dog's Category");
+$catCategory = new Category("CATEGORY: CAT", "Cat's Products", "Cat's Category");
 
 $dogProducts = [
     new Food(

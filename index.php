@@ -37,7 +37,8 @@ include __DIR__ . "/store.php";
                         } else {
                             "";
                         }
-                        ?>
+                        ?> <br>
+                        <?= "PRODUCT CLASS: " . get_class($product) ?>
                     </li>
 
                 <?php } ?>
@@ -66,8 +67,8 @@ include __DIR__ . "/store.php";
                         } else {
                             "";
                         }
-                        ?>
-
+                        ?> <br>
+                        <?= "PRODUCT CLASS: " . get_class($product) ?>
                     </li>
 
                 <?php } ?>
