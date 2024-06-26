@@ -18,62 +18,38 @@ include __DIR__ . "/store.php";
 <body>
     <h1 class="display-4 fw-bold text-warning text-center my-4"> DOGS AND CATS PRODUCTS</h1>
     <div class="row mx-0 justify-content-center">
-        <div class="col-4">
-            <ul class="list-group">
+        <div class="col-8">
+            <div class="row g-3 mx-0">
+                <?php foreach ($products as $product) { ?>
+                    <div class="col-4">
 
-                <?php foreach ($dogProducts as $product) { ?>
+                        <div class="card overflow-hidden">
+                            <img src="<?= $product->img ?>" class="w-100 object-fit-contain">
 
-                    <li class="list-group-item text-center fw-bold">
-                        <?= $product->name ?> <br>
-                        <?= $product->price ?> <br>
-                        <?= $product->category->name ?> <br>
-                        <?php
-                        if (get_class($product) == "Food") {
-                            echo $product->foodWeigth;
-                        } elseif (get_class($product) == "Toy") {
-                            echo $product->toyMaterial;
-                        } elseif (get_class($product) == "Kennel") {
-                            echo $product->kennelDimension;
-                        } else {
-                            "";
-                        }
-                        ?> <br>
-                        <?= "PRODUCT CLASS: " . get_class($product) ?>
-                    </li>
+                            <div class="card-body bg-warning mx-0 fw-bold">
+                                <?= $product->name ?> <br>
+                                <?= $product->price ?> <br>
+                                <?= $product->category->name ?> <br>
+                                <?php
+                                if (get_class($product) == "Food") {
+                                    echo $product->foodWeigth;
+                                } elseif (get_class($product) == "Toy") {
+                                    echo $product->toyMaterial;
+                                } elseif (get_class($product) == "Kennel") {
+                                    echo $product->kennelDimension;
+                                } else {
+                                    "";
+                                }
+                                ?> <br>
+                                <?= "PRODUCT CLASS: " . get_class($product) ?> <br>
+                            </div>
+                        </div>
 
+                    </div>
                 <?php } ?>
 
-            </ul>
 
-        </div>
-
-
-        <div class="col-4">
-            <ul class="list-group">
-
-                <?php foreach ($catProducts as $product) { ?>
-
-                    <li class="list-group-item text-center fw-bold">
-                        <?= $product->name ?> <br>
-                        <?= $product->price ?> <br>
-                        <?= $product->category->name ?> <br>
-                        <?php
-                        if (get_class($product) == "Food") {
-                            echo $product->foodWeigth;
-                        } elseif (get_class($product) == "Toy") {
-                            echo $product->toyMaterial;
-                        } elseif (get_class($product) == "Kennel") {
-                            echo $product->kennelDimension;
-                        } else {
-                            "";
-                        }
-                        ?> <br>
-                        <?= "PRODUCT CLASS: " . get_class($product) ?>
-                    </li>
-
-                <?php } ?>
-
-            </ul>
+            </div>
         </div>
 
     </div>
