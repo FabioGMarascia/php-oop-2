@@ -4,6 +4,7 @@ include __DIR__ . "/models/Product.php";
 include __DIR__ . "/models/Toy.php";
 include __DIR__ . "/models/Food.php";
 include __DIR__ . "/models/Kennel.php";
+include __DIR__ . "/models/Customer.php";
 
 $dogCategory = new Category("CATEGORY: DOG", "Dog's Products", "Dog's Category");
 $catCategory = new Category("CATEGORY: CAT", "Cat's Products", "Cat's Category");
@@ -53,3 +54,5 @@ $products = [
         "KENNEL DIMENSION: 10x35x25"
     ),
 ];
+
+$customer = new Customer("Fabio", "Marascia");

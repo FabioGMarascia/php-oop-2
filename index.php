@@ -1,5 +1,26 @@
 <?php
+
 include __DIR__ . "/store.php";
+
+session_start();
+
+$customerCart = $customer->cart;
+
+if (isset($_POST["clearCart"])) {
+    $_SESSION["customerCart"] = [];
+}
+
+if (!isset($_SESSION["customerCart"])) {
+    $_SESSION["customerCart"] = [];
+}
+
+$customerCart = $_SESSION["customerCart"];
+
+if (isset($_POST["productIndex"])) {
+    $customerCart[] = $products[$_POST["productIndex"]];
+    $_SESSION["customerCart"] = $customerCart;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +41,7 @@ include __DIR__ . "/store.php";
     <div class="row mx-0 justify-content-center">
         <div class="col-8">
             <div class="row g-3 mx-0">
-                <?php foreach ($products as $product) { ?>
+                <?php foreach ($products as $index => $product) { ?>
                     <div class="col-4">
 
                         <div class="card overflow-hidden">
@@ -41,8 +62,12 @@ include __DIR__ . "/store.php";
                                     "";
                                 }
                                 ?> <br>
+
                                 <?= "PRODUCT CLASS: " . get_class($product) ?> <br>
                             </div>
+                            <form action="" method="POST">
+                                <button type="submit" value="<?= $index ?>" name="productIndex" class="btn w-100 fw-bold bg-success">ADD TO CART</button>
+                            </form>
                         </div>
 
                     </div>
@@ -54,6 +79,47 @@ include __DIR__ . "/store.php";
 
     </div>
 
+    <?php if (isset($_POST["productIndex"])) { ?>
+        <h2 class="display-4 fw-bold text-warning text-center my-4">CART</h2>
+        <div class="row mx-0 justify-content-center">
+            <div class="col-8">
+                <div class="row g-3 mx-0">
+                    <?php foreach ($customerCart as $product) { ?>
+                        <div class="col-4">
+                            <div class="card overflow-hidden">
+                                <img src="<?= $product->img ?>" class="w-100 object-fit-contain">
+
+                                <div class="card-body bg-warning mx-0 fw-bold">
+                                    <?= $product->name ?> <br>
+                                    <?= $product->price ?> <br>
+                                    <?= $product->category->name ?> <br>
+                                    <?php
+                                    if (get_class($product) == "Food") {
+                                        echo $product->foodWeigth;
+                                    } elseif (get_class($product) == "Toy") {
+                                        echo $product->toyMaterial;
+                                    } elseif (get_class($product) == "Kennel") {
+                                        echo $product->kennelDimension;
+                                    } else {
+                                        "";
+                                    }
+                                    ?> <br>
+                                    <?= "PRODUCT CLASS: " . get_class($product) ?> <br>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } ?>
+                </div>
+            </div>
+        </div>
+
+
+
+        <form action="" method="POST" class="text-center">
+            <button type="submit" value="" name="clearCart" class="btn bg-danger fw-bold my-3">CLEAR CART</button>
+        </form>
+
+    <?php } ?>
 
 
 </body>
